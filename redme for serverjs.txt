@@ -1,0 +1,54 @@
+var express =require('express'),//module/framework/wrapper(not sure) for node as a middleware.  
+    stylus = require('stylus'),//library for css pre-processor. now since we added this, we need to setup some middleware configuration.
+    logger = require('morgan'),
+    bodyParser = require('body-parser');
+
+var env =process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+var app = express();
+
+/*configrations for stylus. 
+1) one is the compile function that gets used by middleware.
+2)configuring the stylus middleware itself. this confugiration object has 2 settings source, compile function.
+*/
+
+function compile(str,path){
+    return stylus(str).set('filename', path);
+}
+//below is the configuration section.
+app.set('views', __dirname + '/server/views');
+app.set('view engine','jade');
+app.use(logger('dev'));//turn on express as logger, by adding the logger function which got separated from express in 4.0.0, so add morgan lib.
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(stylus.middleware(
+    {
+    src: __dirname + '/public',//__dirname means current directory. 
+    compile: compile 
+    /*this compile fn isn't doing any good if we don't have any routes to our public directory.
+    so we are going to setup STATIC ROUTING to our public directory, we'll do that by using expresss' static middleware.*/
+    }    
+))
+app.use(express.static(__dirname + '/public'));
+//example, it searches for /favicon.ico in /public when sees for its request.
+
+/* 1. when we use'*' it matches all routes. it means all the requests which got to this point will be handled by this route. 
+   2. This includes js requests, css requests, images requests, everything. we use this bcz,
+   edhyna request server ki ochinapudu,manaki handle cheydanki route lekapothe, client side ki chepthadhi..
+   nuvu chusko..nen index page ki pampinchesthunnanu ani. 
+   3. whatever route is created in client side, should be known to be handled by server side.
+   4. when we specify our route with '/', means whenever we go to the root of the website, this is what we want to have happen.*/
+
+//creating route for index page.
+app.get('*',function(req,res){ //callback function with objects called requests and response.
+    res.render('index');
+    //and we need the view file for the server to render. so create a index.jade file in a views directory inside server folder.
+});
+
+var port=3030;
+app.listen(port);
+console.log('Listening to the port '+port+'...');
+
+
+/*block main-content is a placeholder*/
+        
