@@ -52,3 +52,11 @@ console.log('Listening to the port '+port+'...');
 
 /*block main-content is a placeholder*/
         
+
+ /*var messageSchema= mongoose.Schema({message: String});
+var Message= mongoose.model('Message',messageSchema);
+var mongoMessage;
+Message.findOne().exec(function(err, messageDoc){
+    mongoMessage= messageDoc.message;
+});*/
+       
