@@ -6,7 +6,7 @@ angular.module('app').controller('mvNavBarLoginCtrl', function($scope, $http, mv
                 mvNotifier.notify('You have Successfully Logged In!');
             }
             else{
-                mvNotifier.errNotify('Username/Password combination incorrect');
+                mvNotifier.error('Username/Password combination incorrect');
             }
         });
       }

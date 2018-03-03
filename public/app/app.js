@@ -3,9 +3,16 @@ angular.module('app', ['ngResource','ngRoute']);
 angular.module('app').config(function($routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);
     var routeRoleChecks = {
-        admin :{auth: function(mvAuth){
-            mvAuth.authorizeCurrentUserForRoute('admin');
-        }}
+        admin :{
+            auth: function(mvAuth){
+            return mvAuth.authorizeCurrentUserForRoute('admin');
+            }
+        },
+        user: {
+            auth: function(mvAuth){
+            return mvAuth.authorizeAuthenticatedUserForRoute();
+            }
+        }
     }
     $routeProvider
         .when('/',{templateUrl: 'partials/main/main',controller: 'mvMainCtrl'})
@@ -13,7 +20,10 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             templateUrl: 'partials/admin/user-list',
             controller: 'mvUserListCtrl',
             resolve : routeRoleChecks.admin
-        });
+        })
+        .when('/signup', {templateUrl: 'partials/account/signup', controller: 'mvSignupCtrl'})
+        .when('/profile', { templateUrl:'partials/account/profile', controller: 'mvProfileCtrl', resolve: routeRoleChecks.user })
+        .when('/courses', { templateUrl:'partials/courses/course-list', controller: 'mvCourseListCtrl'});
 });
 
 

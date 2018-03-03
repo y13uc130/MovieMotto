@@ -5,16 +5,18 @@ block main-content
         .container
             .navbar-header
                 a.navbar-brand(href="/") Movie Motto
-                    h6 Extreme cine Training
+                    h6 Extreme Cine Training
             .navbar-collapse.collapse   
                 ul.nav.navbar-nav
                     li
                         a(href="/") Home
+                    li
+                        a(href="/courses") Courses                        
                 div(ng-include="'/partials/account/navbar-login'")
 
     section.content
         div(ng-view)
     
     footer.container.text-center
-        p &copy; 2018 Movie Motto corp International Ltd.    
+        p &copy; 2018 Movie Motto Intel Films International Ltd.    
         

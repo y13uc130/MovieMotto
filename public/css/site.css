@@ -8,6 +8,10 @@ footer {
 footer p {
   border-top: 1px solid #d7e0e2;
 }
+li.signup a {
+  padding-top: 11px;
+  padding-right: 30px;
+}
 .navbar {
   margin-bottom: 8px;
   border-radius: 0px;
@@ -39,4 +43,12 @@ h6 {
 }
 .toast-success {
   background-color: #000;
+}
+.magin-left-tej {
+  margin-left: 10px;
+}
+.label {
+  padding-top: 1.2em;
+  font-size: 90%;
+  color: #000;
 }
