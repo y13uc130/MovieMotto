@@ -1,4 +1,4 @@
-angular.module('app').controller('mvMainCtrl',function($scope, mvIdentity, mvCourse){
+angular.module('app').controller('mvMainCtrl',function($scope, mvIdentity, mvCachedCourse){
     $scope.identity=mvIdentity;
-    $scope.courses = mvCourse.query();
+    $scope.courses = mvCachedCourse.query();
 });
