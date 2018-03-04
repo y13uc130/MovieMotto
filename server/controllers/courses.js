@@ -8,3 +8,9 @@ exports.getCourses= function(req, res){
 };
 
 //now that the controller is done, we should create that model. And afterthat, add this controller to routes.
+
+exports.getCourseById =function(req,res){
+    Course.findOne({_id:req.params.id}).exec(function(err, course){
+        res.send(course);
+    })
+}
